@@ -17,7 +17,7 @@
 module load conda/latest
 conda config --add envs_dirs /work/pi_reza_azadeh_uml_edu/$USER/.conda/pkgs
 conda config --add pkgs_dirs /work/pi_reza_azadeh_uml_edu/$USER/.conda/envs
-mamba env create --file environment.yml
+mamba env create --file environment.yml --force --yes
 conda activate tGLAD
 ## Run script
 python main.py
