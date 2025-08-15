@@ -27,7 +27,7 @@ In case of dependencies conflict, one can alternatively use this command `conda 
 
 ``` sh
 mamba env create --file environment.yml
-conda activate tGLAD
+mamba activate tGLAD
 ```
 
 ``` sh
