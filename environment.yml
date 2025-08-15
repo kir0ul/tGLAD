@@ -20,5 +20,6 @@ dependencies:
   - pyvis
   - tqdm
   - ipdb
+  - ruff
 
 # prefix: "/home/kir0ul/miniforge3"
