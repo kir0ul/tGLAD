@@ -41,6 +41,10 @@ A minimalist working example of `tGLAD` is given in `demo_tglad.ipynb`. Refer `m
 
 ``` sh
 wget --directory-prefix=./data https://archive.ics.uci.edu/static/public/231/pamap2+physical+activity+monitoring.zip
+unzip -d ./data/ data/pamap2+physical+activity+monitoring.zip
+rm -v data/pamap2+physical+activity+monitoring.zip
+unzip -d ./data/ data/PAMAP2_Dataset.zip
+rm -v data/PAMAP2_Dataset.zip
 ```
 
 ## Citation
