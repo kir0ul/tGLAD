@@ -68,7 +68,7 @@ def single_main():
 
     #sqrtm_scipy = np.zeros_like(A)
     print('err: ', pd_mat)
-    sqrtm_scipy = scipy.linalg.sqrtm(pd_mat.detach().numpy().astype(np.float_))
+    sqrtm_scipy = scipy.linalg.sqrtm(pd_mat.detach().numpy().astype(float))
 #    for i in range(n):
 #        sqrtm_scipy[i] = sqrtm(pd_mat[i].detach().numpy())
     sqrtm_torch = sqrtm(pd_mat)
@@ -91,9 +91,9 @@ def main():# batch
     #print(test)
 
     sqrtm_scipy = np.zeros_like(pd_mat.detach().numpy())
-    #sqrtm_scipy = scipy.linalg.sqrtm(pd_mat.detach().numpy().astype(np.float_))
+    #sqrtm_scipy = scipy.linalg.sqrtm(pd_mat.detach().numpy().astype(float))
     for i in range(n):
-        sqrtm_scipy[i] = scipy.linalg.sqrtm(pd_mat[i].detach().numpy().astype(np.float))
+        sqrtm_scipy[i] = scipy.linalg.sqrtm(pd_mat[i].detach().numpy().astype(float))
     # batch implementation
     sqrtm_torch = torch.zeros(pd_mat.shape)
     for i in range(n):

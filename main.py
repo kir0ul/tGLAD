@@ -117,7 +117,7 @@ def get_label(extended_win,thresh_ddg_corr):
 
 
 if __name__=="__main__":
-    subject_data = 'data/Pamap/Subject101.dat'
+    subject_data = 'data/PAMAP2_Dataset/Protocol/subject101.dat'
     column_list = ['hand_3D_acceleration_16_x', 'hand_3D_acceleration_16_z', 'ankle_3D_gyroscope_x']
     label = 'activity_id'
     start_part, end_part = 76000, 179000

@@ -25,8 +25,23 @@ the segmentation points. (D) Apply a threshold to zero out the smaller values of
 The `setup.sh` file contains the complete procedure of creating a conda environment for `tGLAD` model. Run the command `bash setup.sh`    
 In case of dependencies conflict, one can alternatively use this command `conda env create --name tGLAD --file=environment.yml`.  
 
+``` sh
+mamba env create --file environment.yml
+conda activate tGLAD
+```
+
+``` sh
+mamba env update --file environment.yml --prune
+```
+
 ## demo     
 A minimalist working example of `tGLAD` is given in `demo_tglad.ipynb`. Refer `main.py` for running uGLAD and recovering Conditional Independence graphs. Then remaining analysis for obtaining segmentation is done in the demo notebook.  
+
+## Dataset
+
+``` sh
+wget --directory-prefix=./data https://archive.ics.uci.edu/static/public/231/pamap2+physical+activity+monitoring.zip
+```
 
 ## Citation
 If you find this method useful, kindly cite the following related papers:

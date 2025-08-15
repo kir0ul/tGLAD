@@ -146,7 +146,7 @@ def convertToTorch(data, req_grad=False, use_cuda=False):
     """
     if not torch.is_tensor(data):
         dtype = torch.cuda.FloatTensor if use_cuda else torch.FloatTensor
-        data = torch.from_numpy(data.astype(np.float, copy=False)).type(dtype)
+        data = torch.from_numpy(data.astype(float, copy=False)).type(dtype)
     data.requires_grad = req_grad
     return data
 
@@ -225,7 +225,8 @@ def process_data_for_CI_graph(table, NORM='min_max', msg='', drop_duplicate=True
     total_samples = table.shape[0]
 
     # typecast the table to floats
-    table = table._convert(numeric=True)
+    # table = table._convert(numeric=True)
+    table = table.astype(float)
 
     # 1. Removing all the rows with zero entries as the samples are missing
     table = table.loc[~(table==0).all(axis=1)]
