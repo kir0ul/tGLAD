@@ -3,8 +3,8 @@
 #SBATCH -G 1  # Number of GPUs
 #SBATCH --ntasks=8                   # Number of CPU cores
 #SBATCH --nodes=1                    # Number of nodes
-#SBATCH --mem=16gb                    # Job memory request
-#SBATCH --time=08:00:00              # Time limit hrs:min:sec
+#SBATCH --mem=8gb                    # Job memory request
+#SBATCH --time=06:00:00              # Time limit hrs:min:sec
 #SBATCH -o slurm-logs/%j-stdout.txt
 #SBATCH -e slurm-logs/%j-stderr.txt
 #SBATCH --mail-type=begin       # send email when job begins
