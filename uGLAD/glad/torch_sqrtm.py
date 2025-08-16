@@ -85,7 +85,6 @@ def single_main():
 
 
 def main():  # batch
-
     n = 2
     A = torch.randn(n, 4, 5).double()
     A.requires_grad = True
