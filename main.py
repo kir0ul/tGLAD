@@ -1,6 +1,8 @@
 import os
 import sys
 
+from get_data import data2df, DATAPATH_ROOT
+
 # reloads modules automatically before entering the
 # execution of code typed at the IPython prompt.
 # sys.path.insert(0, "../..")
@@ -156,30 +158,34 @@ def get_label(extended_win, thresh_ddg_corr):
 
 
 if __name__ == "__main__":
-    subject_data = "data/PAMAP2_Dataset/Protocol/subject101.dat"
-    column_list = [
-        "hand_3D_acceleration_16_x",
-        "hand_3D_acceleration_16_z",
-        "ankle_3D_gyroscope_x",
-    ]
-    label = "activity_id"
-    start_part, end_part = 76000, 179000
+    df = data2df(filenum=0, timestamps=False)
+    column_list = df.columns
+    subject_data = DATAPATH_ROOT
+
+    # subject_data = "data/PAMAP2_Dataset/Protocol/subject101.dat"
+    # column_list = [
+    #     "hand_3D_acceleration_16_x",
+    #     "hand_3D_acceleration_16_z",
+    #     "ankle_3D_gyroscope_x",
+    # ]
+    # label = "activity_id"
+    # start_part, end_part = 76000, 179000
     window_size = 1000
     batch_size = 20
     stride_length = 100
 
-    data = load_subjects(subject_data)
-    modified_df = data[start_part:end_part]
-    df = modified_df[column_list]
-    df = df.ffill()
-    df = df.bfill()
+    # data = load_subjects(subject_data)
+    # modified_df = data[start_part:end_part]
+    # df = modified_df[column_list]
+    # df = df.ffill()
+    # df = df.bfill()
 
     ts_batches = batch_time_series(df, window_size, batch_size, stride_length)
     all_edges = get_all_edges(column_list)
 
     g_correlation_map = {}
     uglad_precision_lst = []
-    folder_name = "result"
+    folder_name = "result/" + str(subject_data).split("/")[-1].split(".")[0]
     if not os.path.exists(folder_name):
         os.makedirs(folder_name)
 
@@ -192,11 +198,11 @@ if __name__ == "__main__":
             g_correlation_map[len(g_correlation_map)] = g_correlation
             uglad_precision_lst.append(uglad_i.precision_[j])
             np.save(
-                f"result/uglad_precision_lst_{batch_size}_{window_size}.npy",
+                f"{folder_name}/uglad_precision_lst_{batch_size}_{window_size}.npy",
                 uglad_precision_lst,
             )
     M = compare_graphs(g_correlation_map)
-    np.save(f"result/matrix_res_{batch_size}_{window_size}.npy", M)
+    np.save(f"{folder_name}/matrix_res_{batch_size}_{window_size}.npy", M)
 
     g_correlation_map = {}
     gt = (modified_df["activity_id"].values > 0) * 1.0
@@ -228,5 +234,5 @@ if __name__ == "__main__":
         "window_size": window_size,
         "accuracy": accuracy_score(gt[: len(labels)], labels),
     }
-    with open("result/logs.json", "w") as f:
+    with open(f"{folder_name}/logs.json", "w") as f:
         json.dump(performance, f)
