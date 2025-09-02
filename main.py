@@ -1,7 +1,7 @@
 import os
 import sys
 
-from get_data import data2df, DATAPATH_ROOT
+from get_data import data2df, DATAPATH_ROOT, get_ground_truth
 
 # reloads modules automatically before entering the
 # execution of code typed at the IPython prompt.
@@ -205,7 +205,8 @@ if __name__ == "__main__":
     np.save(f"{folder_name}/matrix_res_{batch_size}_{window_size}.npy", M)
 
     g_correlation_map = {}
-    gt = (modified_df["activity_id"].values > 0) * 1.0
+    # gt = (modified_df["activity_id"].values > 0) * 1.0
+    gt = get_ground_truth(filenum=0)
     for i in range(len(uglad_precision_lst)):
         g_correlation = get_partial_correlation_from_precision(
             uglad_precision_lst[i], column_list

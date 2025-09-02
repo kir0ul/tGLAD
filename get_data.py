@@ -88,3 +88,15 @@ def data2df(filenum, timestamps=True, datapath_root=DATAPATH_ROOT):
     else:
         traj = pd.DataFrame({"x": data[:, 0], "y": data[:, 1], "z": data[:, 2]})
     return traj
+
+
+def get_ground_truth(filenum):
+    classes = TASK_GROUND_TRUTH[filenum]["idx"]
+    class_vect = np.array([])
+    for idx, (key, val) in enumerate(classes.items()):
+        current_vect = np.ones((val["end"] - val["ini"])) * (idx + 1)
+        class_vect = np.concat((class_vect, current_vect))
+
+    # In the original data, not all the data is segmented and part of the class?
+    gt = (class_vect > 0) * 1.0
+    return gt
