@@ -96,7 +96,4 @@ def get_ground_truth(filenum):
     for idx, (key, val) in enumerate(classes.items()):
         current_vect = np.ones((val["end"] - val["ini"])) * (idx + 1)
         class_vect = np.concat((class_vect, current_vect))
-
-    # In the original data, not all the data is segmented and part of the class?
-    gt = (class_vect > 0) * 1.0
-    return gt
+    return class_vect

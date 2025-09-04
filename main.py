@@ -206,7 +206,8 @@ if __name__ == "__main__":
 
     g_correlation_map = {}
     # gt = (modified_df["activity_id"].values > 0) * 1.0
-    gt = get_ground_truth(filenum=0)
+    class_vect = get_ground_truth(filenum=0)
+    gt = (class_vect > 0) * 1.0
     for i in range(len(uglad_precision_lst)):
         g_correlation = get_partial_correlation_from_precision(
             uglad_precision_lst[i], column_list
